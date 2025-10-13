@@ -5,6 +5,7 @@ import { checkJwt } from 'middleware/checkJwt';
 import { checkRole } from 'middleware/checkRole';
 import { validatorEdit } from 'middleware/validation/users';
 
+
 const router = Router();
 
 router.get('/', [checkJwt, checkRole(['ADMINISTRATOR'])], list);
