@@ -255,3 +255,7 @@ export class StudentService {
 }
 ```
 ## Скріншоти Postman
+### Поганий запит
+![request](/img/bad_request.jpg)
+### Успішний запит
+![request](/img/good_request.jpg)
