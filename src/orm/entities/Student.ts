@@ -1,9 +1,10 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { StudentRoomHistory } from './StudentRoomHistory';
+
+import { EvictionRequest } from './EvictionRequest';
 import { LivingReceipt } from './LivingReceipt';
 import { Payment } from './Payment';
-import { EvictionRequest } from './EvictionRequest';
 import { RepairRequest } from './RepairRequest';
+import { StudentRoomHistory } from './StudentRoomHistory';
 
 @Entity({ name: 'Студент' })
 export class Student {
@@ -28,7 +29,7 @@ export class Student {
   @Column({ name: 'По-батькові' })
   middleName: string;
 
-  @Column({ name: 'Ім\'я' })
+  @Column({ name: "Ім'я" })
   firstName: string;
 
   @Column({ name: 'Пільги', nullable: true })

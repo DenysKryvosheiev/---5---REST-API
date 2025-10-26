@@ -5,6 +5,7 @@ dotenv.config();
 const isCompiled = __dirname.includes('dist');
 
 const config: ConnectionOptions = {
+  name: 'default',
   type: 'postgres',
   host: process.env.PG_HOST,
   port: Number(process.env.PG_PORT),

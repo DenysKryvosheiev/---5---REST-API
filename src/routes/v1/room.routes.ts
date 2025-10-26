@@ -1,11 +1,15 @@
 import { Router } from 'express';
 
-import { createRoom, getRooms, getRoomByNumber,updateRoom,deleteRoom} from '../../controllers/room.controller';
+import { RoomController } from '../../controllers/room.controller';
+import { checkJwt } from '../../middleware/checkJwt';
+import { validatorCreateRoom } from '../../middleware/validation/room/validatorCreateRoom';
 
 const router = Router();
-router.post('/', createRoom);
-router.get('/:roomNumber', getRoomByNumber);
-router.get('/', getRooms);
-router.patch('/:roomNumber', updateRoom);
-router.delete('/:roomNumber', deleteRoom);
+
+router.get('/', checkJwt, RoomController.getAll);
+router.get('/:roomNumber', checkJwt, RoomController.getByNumber);
+router.post('/', checkJwt, validatorCreateRoom, RoomController.create);
+router.patch('/:roomNumber', checkJwt, RoomController.update);
+router.delete('/:roomNumber', checkJwt, RoomController.delete);
+
 export default router;

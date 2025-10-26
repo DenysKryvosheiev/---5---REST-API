@@ -1,11 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
 
-export const errorHandler = (err: any, req: Request, res: Response, next: NextFunction) => {
+import { CustomError } from '../utils/response/custom-error/CustomError';
+
+export const errorHandler = (err: Error | CustomError, req: Request, res: Response, next: NextFunction) => {
   console.error('❌ Error caught by middleware:', err);
 
-  const status = err.status || 500;
+  if (err instanceof CustomError) {
+    return res.status(err.httpStatusCode || 500).json({
+      success: false,
+      statusCode: err.httpStatusCode,
+      errorType: err.errorType,
+      message: err.message,
+      errors: err.errorsValidation || err.errors || null,
+    });
+  }
 
-  res.status(status).json({
+  return res.status(500).json({
     success: false,
     message: err.message || 'Internal Server Error',
     stack: err.stack,

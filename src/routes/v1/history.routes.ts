@@ -1,10 +1,14 @@
 import { Router } from 'express';
 
-import { createHistory, getHistories, getHistoryById,updateHistory, deleteHistory} from '../../controllers/history.controller';
+import { StudentRoomHistoryController } from '../../controllers/history.controller';
+import { checkJwt } from '../../middleware/checkJwt';
+
 const router = Router();
-router.post('/', createHistory);
-router.get('/', getHistories);
-router.get('/:id', getHistoryById);
-router.patch('/:id', updateHistory);
-router.delete('/:id', deleteHistory);
+
+router.get('/', checkJwt, StudentRoomHistoryController.getAll);
+router.get('/:id', checkJwt, StudentRoomHistoryController.getById);
+router.post('/', checkJwt, StudentRoomHistoryController.create);
+router.patch('/:id', checkJwt, StudentRoomHistoryController.update);
+router.delete('/:id', checkJwt, StudentRoomHistoryController.delete);
+
 export default router;
